@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Keyboardia - World Map</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css "
+    />
+    <style>
+    /* General Reset */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.hero {
+  background-image: url('your-hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+
+.hero h1, .hero p {
+  position: relative;
+  z-index: 2;
+  margin: 0.5rem 0;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 70ch;
+}
+
+/* Box container styling - Glassmorphism */
+.box {
+  background: rgba(255, 255, 255, 0.4); 
+  padding: 2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.2s ease;
+
+}
+
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #3a7bd5;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* World map grid */
+.world-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.level-card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.level-card:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.level-card i {
+  font-size: 2rem;
+  color: #3a7bd5;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.level-card:hover i {
+  transform: scale(1.2);
+}
+
+.level-card h2 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.level-card p {
+  font-size: 0.85rem;
+  color: #555;
+}
+    </style>
+  </head>
+  <body>
+    <div class="box hero">
+      <h1>Welcome to Keyboardia!</h1>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem id quasi reiciendis ab labore, voluptatum nemo non iste consequatur alias eveniet saepe quo tempora!
+      </p>
+
+      <a href="/login" class="btn-enter">Login</a>
+    </div>
+
+    <div class="box">
+      <p>Select a world and go on a typing adventure!</p>
+
+      <div class="world-map">
+        <a href="/play/level/1" class="level-card">
+          <i class="fas fa-star"></i>
+          <h2>Space</h2>
+        </a>
+
+        <a href="/?level=2" class="level-card">
+          <i class="fas fa-cow"></i>
+          <h2>Farm</h2>
+        </a>
+
+        <a href="/?level=3" class="level-card">
+          <i class="fas fa-bus"></i>
+          <h2>Vehicles</h2>
+        </a>
+
+        <a href="/?level=4" class="level-card">
+          <i class="fas fa-hashtag"></i>
+          <h2>Numbers</h2>
+        </a>
+
+        <a href="/?level=5" class="level-card">
+          <i class="fas fa-clock"></i>
+          <h2>Time</h2>
+        </a>
+
+        <a href="/?level=6" class="level-card">
+          <i class="fas fa-fish"></i>
+          <h2>Under the Sea</h2>
+        </a>
+
+        <a href="/?level=7" class="level-card">
+          <i class="fas fa-tshirt"></i>
+          <h2>Clothes</h2>
+        </a>
+
+        <a href="/?level=8" class="level-card">
+          <i class="fas fa-sun"></i>
+          <h2>Seasons</h2>
+        </a>
+
+        <a href="/?level=9" class="level-card">
+          <i class="fas fa-apple-alt"></i>
+          <h2>Food</h2>
+        </a>
+
+        <a href="/?level=10" class="level-card">
+          <i class="fas fa-user-alt"></i>
+          <h2>Body Parts</h2>
+        </a>
+      </div>
+    </div>
+
+    <div class="box">
+      <a href="/endless" class="level-card">
+        <i class="fas fa-infinity"></i>
+        <h2>Endless Typing</h2>
+        <p>Type as many words as you can!</p>
+      </a>
+    </div>
+  
+    <script>
+      const CURRENT_LEVEL = `{{ current_level }}`;
+
+      // Unlock only up to their level
+      document.querySelectorAll(".level-card").forEach((card, index) => {
+        const levelNum = index + 1;
+
+        if (levelNum <= CURRENT_LEVEL) {
+          card.classList.remove("");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>Keyboardia-Log In</title>
+    </head>
+    <body>
+    <div class="login-page">
+        <div class="login-container">
+            <h2>Log In</h2>
+            <p>Enter your name to start typing adventure!</p>
+            <form method="post">
+                <input type="text" name="username" placeholder="Type your name..." required>
+                <button type="submit" class="btn-login">Start Typing!</button>
+            </form>
+        </div>
+    </div>  
+    </body>
+</html>
