@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Keyboardia</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css "/>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css "
+    />
   </head>
   <body>
     <div id="themeName"></div>
-    <h1>Kids Typing Adventure</h1>
+    <h1>Keboardia Land Adventure</h1>
     <!-- User Name -->
     {% if user %}
     <p>Welcome <strong>{{ user.username }}</strong>!</p>
@@ -43,7 +50,7 @@
       <button onclick="playRhymeAudio()" title="Play">
         <i class="fas fa-play"></i> Play Song
       </button>
-
+<!--for johnny <button onclick="launchConfetti()">Confetti</button> -->
       <button onclick="pauseRhymeAudio()" title="Pause">
         <i class="fas fa-pause"></i> Pause
       </button>
@@ -58,6 +65,7 @@
     </div>
 
     <!-- Script Setup -->
+
     <script>
       const IS_GUEST = "{{ 'guest' in session }}";
       const userProgress = "{{ user.progress }}"; // e.g., "1;1"
@@ -65,5 +73,6 @@
       const CURRENT_LEVEL = parseInt(levelStr); // Convert to number
     </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
   </body>
 </html>

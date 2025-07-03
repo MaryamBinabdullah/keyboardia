@@ -2,17 +2,7 @@
 const targetWord = document.getElementById("targetWord");
 const themeName = document.getElementById("themeName") || { innerText: "" };
 
-//cofetti
-function launchConfetti() {
-  confetti({
-    particleCount: 200,
-    spread: 90,
-    origin: { y: 0.6 },
-    ticks: 200,
-    scalar: 1.2,
-    colors: ["#FFD700", "#FF69B4", "#00FFFF", "#FF4500", "#00FF00"],
-  });
-}
+
 //""""
 let rhymeAudio = null;
 let currentRhymeData = null;
@@ -412,7 +402,17 @@ function showRhyme() {
     }
   };
 }
-
+//cofetti
+function launchConfetti() {
+  confetti({
+    particleCount: 200,
+    spread: 90,
+    origin: { y: 0.6 },
+    ticks: 200,
+    scalar: 1.2,
+    colors: ["#FFD700", "#FF69B4", "#00FFFF", "#FF4500", "#00FF00"],
+  });
+}
 // Play sound effect
 function playSound() {
   const audio = new Audio("/static/audio/key-sound.mp3");
