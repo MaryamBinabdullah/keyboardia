@@ -1,6 +1,18 @@
+// import confetti from 'canvas-confetti';
 const targetWord = document.getElementById("targetWord");
-const themeName = document.getElementById("themeName");
+const themeName = document.getElementById("themeName") || { innerText: "" };
 
+//cofetti
+function launchConfetti() {
+  confetti({
+    particleCount: 200,
+    spread: 90,
+    origin: { y: 0.6 },
+    ticks: 200,
+    scalar: 1.2,
+    colors: ["#FFD700", "#FF69B4", "#00FFFF", "#FF4500", "#00FF00"],
+  });
+}
 //""""
 let rhymeAudio = null;
 let currentRhymeData = null;
@@ -381,7 +393,7 @@ function showRhyme() {
         rhymeControlsEl.style.display = "flex";
         rhymeControlsEl.style.gap = "15px";
         rhymeControlsEl.style.justifyContent = "center";
-
+        launchConfetti(); // Add this line
         // Play the rhyme automatically
         rhymeAudio = new Audio(currentRhymeData.audio);
         rhymeAudio.loop = false;
@@ -486,6 +498,102 @@ function skipRhyme() {
   document.getElementById("rhymeVerse").innerText = "";
   document.getElementById("rhymeControls").style.display = "none";
   moveToNextLevel(); // Make sure this function exists
+}
+
+//endless Mode
+// Only run if we're on the endless typing page
+if (document.getElementById("wordContainer")) {
+  // Word List
+  const ENDLESS_WORDS = [
+    "cat", "dog", "sun", "fun", "red", "blue", "car", "bus",
+    "hat", "ball", "tree", "book", "milk", "door", "fish"
+  ];
+
+  let currentEndlessWord = "";
+  let endlessScore = 0;
+
+  // Show Random Word + highlight first letter
+  function showRandomEndlessWord() {
+    currentEndlessWord = ENDLESS_WORDS[Math.floor(Math.random() * ENDLESS_WORDS.length)];
+    document.getElementById("wordContainer").innerText = currentEndlessWord;
+    highlightNextLetter(currentEndlessWord[0]);
+  }
+
+  // Handle Key Press in Endless Mode
+  function handleEndlessKeyPress(pressed) {
+    const wordElement = document.getElementById("wordContainer");
+    if (!currentEndlessWord) return;
+
+    const expectedChar = currentEndlessWord[0]?.toLowerCase();
+    const inputChar = pressed.toLowerCase();
+
+    if (inputChar === expectedChar) {
+      playSound(); 
+
+      currentEndlessWord = currentEndlessWord.slice(1);
+      wordElement.innerText = currentEndlessWord;
+
+      if (currentEndlessWord === "") {
+        endlessScore++;
+        launchConfetti(); 
+        setTimeout(() => {
+          showRandomEndlessWord(); 
+        }, 300);
+      } else {
+        highlightNextLetter(currentEndlessWord[0]); 
+      }
+    } else {
+      playWrongSound(); 
+    }
+
+    highlightPressedKey(pressed);
+  }
+
+  // Create on screen keyboard
+  function createEndlessKeyboard() {
+    const keyboardDiv = document.getElementById("keyboard");
+    if (!keyboardDiv) return;
+
+    keyboardDiv.innerHTML = ""; // Clear any old buttons
+
+    const rows = [
+      ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+      ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+      ["z", "x", "c", "v", "b", "n", "m"]
+    ];
+
+    for (let row of rows) {
+      const rowDiv = document.createElement("div");
+      rowDiv.classList.add("key-row");
+
+      for (let key of row) {
+        const btn = document.createElement("button");
+        btn.classList.add("key");
+        btn.innerText = key;
+        btn.dataset.letter = key;
+        btn.onclick = () => {
+          handleEndlessKeyPress(key);
+        };
+        rowDiv.appendChild(btn);
+      }
+
+      keyboardDiv.appendChild(rowDiv);
+    }
+  }
+
+  // keyboard listener
+  document.addEventListener("keydown", (e) => {
+    const pressed = e.key.toLowerCase();
+    if (/^[a-z]$/.test(pressed)) {
+      handleEndlessKeyPress(pressed);
+    }
+  });
+
+  // Start Game
+  document.addEventListener("DOMContentLoaded", () => {
+    createEndlessKeyboard();
+    showRandomEndlessWord();
+  });
 }
 
 // Start game
