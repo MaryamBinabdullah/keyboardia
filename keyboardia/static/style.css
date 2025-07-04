@@ -3,7 +3,7 @@
   /* Colors */
   /* --bg-color: #3877ae; */
   --bg-color: #fa0f8ff;
-  --key-bg: #f0f0f0;
+  --key-bg: #b3fcff;
   --key-hover: #e0e0e0;
   --key-active-scale: 0.95;
   --key-border: #ccc;
@@ -25,13 +25,14 @@
 body {
   font-family: var(--font-main);
   background-color: var(--bg-color);
-  text-align: center;
+  height: 100vh;
   padding: 2rem;
   color: var(--text-color);
   margin: 0 auto;
-  /* max-width: 900px; */
 }
-
+#center{
+  text-align: center;
+}
 h1 {
   font-size: 2.5em;
   margin-bottom: 10px;
@@ -44,6 +45,7 @@ h1 {
   padding: 10px 20px;
   min-width: 100px;
   height: 2rem;
+  padding-bottom: 3rem;
 }
 
 /* ============ KEYBOARD STYLES ============ */
@@ -232,15 +234,8 @@ body.theme-body-parts {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.level-card i {
-  font-size: 32px;
-  margin-top: 10px;
-  color: #1a73e8;
-}
-
 .level-card h2 {
   font-size: 16px;
-  color: #1a73e8;
 }
 
 .level-card p {
@@ -249,18 +244,23 @@ body.theme-body-parts {
 }
 
 .hero {
-  background-image: url("your-hero-image.jpg");
+  background-image: url("/static/images/hero.jpg");
+
   background-size: cover;
+  background-blend-mode: multiply;
+  background-color: #0000004e;
+
   background-position: center;
-  height: 300px;
+
+  min-height: 300px;
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
   text-align: center;
-  padding: 2rem;
   position: relative;
+  padding: 5rem 0.1rem;
 }
 
 .hero h1,
@@ -280,25 +280,54 @@ body.theme-body-parts {
   max-width: 70ch;
 }
 
-/* Box container styling - Glassmorphism */
+/* Box container styling */
 .box {
-  background: rgba(255, 255, 255, 0.4);
+  /* background-color: rgba(255, 251, 140, 0.4); */
   padding: 2rem;
-  margin-bottom: 2rem;
-  width: 100%;
+  margin: 2rem auto;
   text-align: center;
   transition: transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* World map grid */
+.box:last-child {
+  background-blend-mode: multiply;
+  background-color: #0000004e;
+
+  min-height: 300px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 5rem 0.1rem;
+}
+
+/* World map flex */
 .world-map {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
 
+body > .box:nth-child(3) {
+  background-image: url("/static/images/looop.png");
+  background-size: cover;
+  height: 15rem;
+  background-position: center;
+}
+body > .box:nth-child(2) {
+  background-image: url("/static/images/dots.png");
+  background-size: cover;
+  background-position: center;
+}
 .level-card {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.589);
   border-radius: 12px;
   padding: 1rem;
   text-decoration: none;
@@ -309,7 +338,7 @@ body.theme-body-parts {
   align-items: center;
   border: 2px solid transparent;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
   align-items: center;
   justify-content: center;
 }
@@ -326,7 +355,11 @@ body.theme-body-parts {
   transition: transform 0.2s ease;
 }
 .level-card i.fas {
-background-image: linear-gradient(45deg, red, orange,#ff80ee, #a72cff, #00e1ff);
+  background-image: linear-gradient(
+    45deg,
+    #ffc120,
+    #f1335f /* #ff80ee, */ /* #a72cff, */ /* #00e1ff */
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -347,3 +380,133 @@ background-image: linear-gradient(45deg, red, orange,#ff80ee, #a72cff, #00e1ff);
   font-size: 0.85rem;
   color: #555;
 }
+
+/* Style for the login box */
+.login-page {
+  justify-content: center;
+  display: flex;
+  position: relative; /* Ensure stacking context */
+  z-index: 2; /* Make sure it's above background animations */
+  min-height: 100vh;
+  align-items: center;
+}
+
+.login-container {
+  position: relative; /* So z-index works */
+  z-index: 3; /* Higher than background elements */
+  background-color: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+.login-container h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.login-container p {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Input field styling */
+.login-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Moving background */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-color: rgb(255, 255, 255);
+}
+/* .container {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+} */
+ .container {
+  min-height: 100vh;
+  overflow: hidden;
+  position: absolute; /* Or fixed if you want parallax */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Behind login */
+}
+.container div {
+  position: absolute;
+  border-radius: 3rem;
+  animation: gardient 4s infinite;
+}
+@keyframes gardient {
+  50% {
+    transform: scale(1.3) translate(100px);
+  }
+}
+.container div:nth-child(1) {
+  height: 100%;
+  width: 100%;
+  background-color: #fc097e;
+}
+.container div:nth-child(2) {
+  height: 80%;
+  width: 70%;
+  background-color: #b701ff;
+  top: -12%;
+  right: -12%;
+  animation-delay: 2s;
+}
+.container div:nth-child(3) {
+  height: 50%;
+  width: 75%;
+  background-color: #5101ff;
+  bottom: -10%;
+  left: -5%;
+  animation-delay: 1s;
+}
+.container div:nth-child(4) {
+  height: 65%;
+  width: 80%;
+  background-color: #01f2ff;
+  bottom: -15%;
+  right: -25%;
+  animation-delay: 3s;
+}
+.container div:nth-child(5) {
+  height: 70%;
+  width: 65%;
+  background-color: #ffc001;
+  bottom: 0;
+  right: -50%;
+  animation-delay: 1s;
+}
+.container div:nth-child(6) {
+  height: 50%;
+  width: 55%;
+  background-color: #38ff01;
+  bottom: 0;
+  left: -50%;
+  animation-delay: 2s;
+}
+.container::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(200px);
+}
+

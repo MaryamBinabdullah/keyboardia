@@ -15,12 +15,14 @@
     />
   </head>
   <body>
+    <div id="center">
     <div id="themeName"></div>
-    <h1>Keboardia Land Adventure</h1>
+    
+    <h1>Keboardia Adventure</h1>
     <!-- User Name -->
     {% if user %}
     <p>Welcome <strong>{{ user.username }}</strong>!</p>
-    <p><strong>Level:</strong> <span id="themeName"></span></p>
+    <!-- <p><strong>Level:</strong> <span id="themeName"></span></p> -->
     {% endif %}
 
     <!-- Word to type -->
@@ -73,6 +75,6 @@
       const CURRENT_LEVEL = parseInt(levelStr); // Convert to number
     </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
+</div>
   </body>
 </html>

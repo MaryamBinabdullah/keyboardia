@@ -1,7 +1,7 @@
 // import confetti from 'canvas-confetti';
 const targetWord = document.getElementById("targetWord");
 const themeName = document.getElementById("themeName") || { innerText: "" };
-const ONE_WORD_STAGES = true  // when enabled each stage will have only 1 word (for testing)
+const ONE_WORD_STAGES = false  // when enabled each stage will have only 1 word (for testing)
 
 //""""
 let rhymeAudio = null;
@@ -530,10 +530,18 @@ function skipRhyme() {
 if (document.getElementById("wordContainer")) {
   // Word List
   const ENDLESS_WORDS = [
-    "cat", "dog", "sun", "fun", "red", "blue", "car", "bus",
-    "hat", "ball", "tree", "book", "milk", "door", "fish"
+ "head", "shoulders", "knees", "toes","hands", "elbow", "finger", "nose",
+"apple", "banana", "pear", "grape","cake", "bread", "milk", "juice",
+  "spring", "summer", "autumn", "winter","sun", "snow", "rain", "leaf",
+"shirt", "pants", "socks", "hat","jacket", "shoes", "gloves", "scarf",
+"fish", "whale", "octopus", "shark","crab", "jellyfish", "turtle", "coral",
+"clock", "hour", "minute", "second","morning", "afternoon", "night", "evening",
+"one", "two", "three", "four","five", "six", "seven", "eight",
+"bus", "car", "truck", "train","bike", "boat", "plane", "van",
+"cow", "pig", "sheep", "chicken","tractor", "barn", "hay", "duck",
+"rocket", "moon", "star", "galaxy","planet", "comet", "alien", "satellite"
   ];
-
+  
   let currentEndlessWord = "";
   let endlessScore = 0;
 

@@ -1,1 +1,115 @@
-[{"name": "Space", "theme": "space", "stages": [["rocket", "moon", "star", "galaxy", "planet", "comet", "alien", "satellite"]], "rhyme": {"verse": "Twinkle", "audio": "/static/audio/twinkle.mp3"}}, {"name": "On the Farm", "theme": "farm", "stages": [["cow", "pig", "sheep", "chicken", "tractor", "barn", "hay", "duck"]], "rhyme": {"verse": "Old", "audio": "/static/audio/old-mcdonald.mp3"}}, {"name": "Vehicles", "theme": "vehicles", "stages": [["bus", "car", "truck", "train", "bike", "boat", "plane", "van"]], "rhyme": {"verse": "The", "audio": "/static/audio/wheels-on-the-bus.mp3"}}, {"name": "Numbers", "theme": "numbers", "stages": [["one", "two", "three", "four", "five", "six", "seven", "eight"]], "rhyme": {"verse": "One", "audio": "/static/audio/one-two-buckle-my-shoe.mp3"}}, {"name": "Time", "theme": "time", "stages": [["clock", "hour", "minute", "second", "morning", "afternoon", "night", "evening"]], "rhyme": {"verse": "Hickory", "audio": "/static/audio/hickory-dickory.mp3"}}, {"name": "Under the Sea", "theme": "sea", "stages": [["fish", "whale", "octopus", "shark", "crab", "jellyfish", "turtle", "coral"]], "rhyme": {"verse": "One", "audio": "/static/audio/five-little-fishies.mp3"}}, {"name": "Clothes", "theme": "clothes", "stages": [["shirt", "pants", "socks", "hat", "jacket", "shoes", "gloves", "scarf"]], "rhyme": {"verse": "This", "audio": "/static/audio/this-is-the-way.mp3"}}, {"name": "Seasons", "theme": "seasons", "stages": [["spring", "summer", "autumn", "winter", "sun", "snow", "rain", "leaf"]], "rhyme": {"verse": "Spring", "audio": "/static/audio/spring-songs.mp3"}}, {"name": "Food", "theme": "food", "stages": [["apple", "banana", "pear", "grape", "cake", "bread", "milk", "juice"]], "rhyme": {"verse": "Apples", "audio": "/static/audio/apples-and-bananas.mp3"}}, {"name": "Body Parts", "theme": "body-parts", "stages": [["head", "shoulders", "knees", "toes", "hands", "elbow", "finger", "nose"]], "rhyme": {"verse": "Head", "audio": "/static/audio/head-shoulders-knees-toes.mp3"}}]
+[
+  {
+    "name": "Space",
+    "theme": "space",
+    "stages": [
+      ["rocket", "moon", "star","galaxy","planet","comet","alien","satellite"]
+    ],
+    "rhyme": { "verse": "Twinkle twinkle little star, how I wonder what you are.", "audio": "/static/audio/twinkle.m4a" }
+  },
+  {
+    "name": "On the Farm",
+    "theme": "farm",
+    "stages": [
+      ["cow", "pig", "sheep", "chicken", "tractor", "barn", "hay", "duck"]
+    ],
+    "rhyme": { "verse": "Old McDonald had a farm, E-I-E-I-O. And on that farm he had a cow, E-I-E-I-O.", "audio": "/static/audio/old-mcdonald.m4a" }
+  },
+  {
+    "name": "Vehicles",
+    "theme": "vehicles",
+    "stages": [
+      ["bus", "car", "truck", "train", "bike", "boat", "plane", "van"]
+    ],
+    "rhyme": { "verse": "The wheels on the bus go round and round, round and round, round and round. The wheels on the bus go round and round all through the town.", "audio": "/static/audio/wheels-on-the-bus.m4a" }
+  },
+  {
+    "name": "Numbers",
+    "theme": "numbers",
+    "stages": [
+      ["one", "two", "three", "four", "five", "six", "seven", "eight"]
+    ],
+    "rhyme": {
+      "verse": "1 2 buckle my shoe, 3 4 knock at the door. 5 6 pick up sticks, 7 8 lay them straight.",
+      "audio": "/static/audio/One Two Buckle My Shoe.m4a"
+    }
+  },
+  {
+    "name": "Time",
+    "theme": "time",
+    "stages": [
+      [
+        "clock",
+        "hour",
+        "minute",
+        "second",
+        "morning",
+        "afternoon",
+        "night",
+        "evening"
+      ]
+    ],
+    "rhyme": {
+      "verse": "Hickory dickory dock, the mouse ran up the clock. Hickory dickory dock!",
+      "audio": "/static/audio/hickory-dickory.m4a"
+    }
+  },
+  {
+    "name": "Under the Sea",
+    "theme": "sea",
+    "stages": [
+      [
+        "fish",
+        "whale",
+        "octopus",
+        "shark",
+        "crab",
+        "jellyfish",
+        "turtle",
+        "coral"
+      ]
+    ],
+    "rhyme": {
+      "verse": "Row row row your boat gently down the stream. Merrily merrily merrily merrily, life is but a dream.",
+      "audio": "/static/audio/fishes.mp3"
+    }
+  },
+  {
+    "name": "Clothes",
+    "theme": "clothes",
+    "stages": [
+      ["shirt", "pants", "socks", "hat", "jacket", "shoes", "gloves", "scarf"]
+    ],
+    "rhyme": { "verse": "Put your socks on, put your socks on.Put your pants on, put your pants on.", "audio": "/static/audio/this-is-the-way.m4a" }
+  },
+  {
+    "name": "Seasons",
+    "theme": "seasons",
+    "stages": [
+      ["spring", "summer", "autumn", "winter", "sun", "snow", "rain", "leaf"]
+    ],
+    "rhyme": { "verse": "I like tulips in the spring, they're beautiful. I like cherries in the summer, they're juicy. I like chestnuts in the fall, they're yummy. I like snow in the winter, it's cold", "audio": "/static/audio/Seasons.m4a" }
+  },
+  {
+    "name": "Food",
+    "theme": "food",
+    "stages": [
+      ["apple", "banana", "pear", "grape", "cake", "bread", "milk", "juice"]
+    ],
+    "rhyme": {
+      "verse": "Pat a cake pat a cake baker man, bake a cake as fast as you can.",
+      "audio": "/static/audio/Pat-A-Cake.m4a"
+    }
+  },
+  {
+    "name": "Body Parts",
+    "theme": "body-parts",
+    "stages": [
+      ["head", "shoulders", "knees", "toes", "hands", "elbow", "finger", "nose"]
+    ],
+    "rhyme": {
+      "verse": "Head shoulders knees and toes, knees and toes. Head shoulders knees and toes, knees and toes. Eyes ears mouth and nose. Head shoulders knees and toes, knees and toes.",
+      "audio": "/static/audio/head-shoulders-knees-toes.m4a"
+    }
+  }
+]
