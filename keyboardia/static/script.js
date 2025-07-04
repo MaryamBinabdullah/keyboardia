@@ -1,7 +1,7 @@
 // import confetti from 'canvas-confetti';
 const targetWord = document.getElementById("targetWord");
 const themeName = document.getElementById("themeName") || { innerText: "" };
-
+const ONE_WORD_STAGES = true  // when enabled each stage will have only 1 word (for testing)
 
 //""""
 let rhymeAudio = null;
@@ -149,6 +149,8 @@ function loadLevel(levelNum, stageNum) {
   }
 
   words = stages[stageNum - 1];
+  if (ONE_WORD_STAGES && words.length>0)
+  	words = [words[0]];
   currentWordIndex = 0;
   startLevel();
 }
@@ -255,14 +257,36 @@ function saveProgress(level, stage) {
   });
 }
 
+function genQuiz(curr_level_words_list, imgs_path)
+{
+	let quiz = {};
+	let shuffled_words = shuffle(curr_level_words_list, 3);
+	let options = [shuffled_words[0], shuffled_words[1], shuffled_words[2]];
+	let answer = randomItem(options);
+	// adding letters numbering to options
+	for (let i = 0; i < options.length; i++)
+		options[i] = "abc".split("")[i] + ") "+ options[i]
+		
+	let img = imgs_path + "/" + answer + ".jpg";
+	
+	quiz["options"] = options
+	quiz["answer"] = answer
+	quiz["image"] = img
+	return quiz
+	
+}
+
 // Show multiple-choice quiz at end of level
 function showQuiz() {
   const currentLevelData = LEVELS[currentLevel - 1];
+  console.log(currentLevelData['stages'][0])
+  const quiz = genQuiz(currentLevelData['stages'][0], "/static/images")
+  
 
-  if (!currentLevelData.quiz) {
-    showRhyme();
-    return;
-  }
+//  if (!currentLevelData.quiz) {
+//   showRhyme();
+//  return;
+// }
 
   const quizArea = document.getElementById("quizArea");
   const imageEl = document.getElementById("quizImage");
@@ -274,13 +298,13 @@ function showQuiz() {
   targetWord.style.display = "none";
 
   // Set quiz content
-  imageEl.src = currentLevelData.quiz.image;
+  imageEl.src = quiz.image;
   questionEl.innerText = "What is this?";
   optionsEl.innerHTML = "";
   quizInput.innerText = ""; // Clear previous input
 
   // Show multiple-choice options
-  currentLevelData.quiz.options.forEach((option) => {
+  quiz.options.forEach((option) => {
     const li = document.createElement("li");
     li.innerText = option;
     optionsEl.appendChild(li);
@@ -289,7 +313,7 @@ function showQuiz() {
   quizArea.style.display = "block";
 
   // Get the correct answer (lowercase)
-  const answer = currentLevelData.quiz.answer.toLowerCase();
+  const answer = quiz.answer.toLowerCase();
 
   // Track user input
   let userInput = "";
@@ -326,6 +350,7 @@ function showQuiz() {
     }
   };
 }
+
 // show light up
 function highlightPressedKey(letter) {
   const keys = document.querySelectorAll(".key");
@@ -601,3 +626,25 @@ document.addEventListener("DOMContentLoaded", () => {
   createKeyboard();
   loadLevels();
 });
+
+// ~~~~~~~~~~~~~~~~~ helper functions ~~~~~~~~~~~~~~~~~~~~
+// returns a shuffled copy of input array 
+function shuffle(array, times=1)
+{
+	let copy = array.slice();
+	for (let i = copy.length - 1; i > 0 ; i--)
+	{
+		let j = Math.floor(Math.random() * (i + 1));
+		[copy[i], copy[j]] = [copy[j], copy[i]]
+	}
+	// recursively repeat the shuffle depending on the times parameter
+	return (times - 1 <= 0)? copy : shuffle(copy, times - 1)
+}
+
+// returns a random item from a list 
+// NOTE: this function does not return a copy for non-primitve types 
+function randomItem(array)
+{
+	random_index = Math.floor(Math.random() * array.length)
+	return array[random_index]
+}
