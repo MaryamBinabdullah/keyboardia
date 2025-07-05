@@ -1,7 +1,7 @@
 // import confetti from 'canvas-confetti';
 const targetWord = document.getElementById("targetWord");
 const themeName = document.getElementById("themeName") || { innerText: "" };
-const ONE_WORD_STAGES = false  // when enabled each stage will have only 1 word (for testing)
+const ONE_WORD_STAGES = true  // when enabled each stage will have only 1 word (for testing)
 
 //""""
 let rhymeAudio = null;
@@ -168,8 +168,8 @@ function applyTheme(theme) {
     case "On the Farm":
       body.classList.add("theme-farm");
       break;
-    case "Vehicles":
-      body.classList.add("theme-vehicles");
+    case "Transport":
+      body.classList.add("theme-transport");
       break;
     case "Numbers":
       body.classList.add("theme-numbers");
@@ -658,3 +658,363 @@ function randomItem(array)
 	random_index = Math.floor(Math.random() * array.length)
 	return array[random_index]
 }
+
+
+// canvasss
+// === Animated Backgrounds Based on Theme ===
+
+
+const canvas = document.getElementById('backgroundCanvas');
+const ctx = canvas.getContext('2d');
+
+let animationFrameId;
+
+// Particle arrays
+let stars = [];
+let bubbles = [];
+let transportObjects = [];
+let leaves = [];
+let numbers = [];
+let clock = { angle: 0 };
+let clothesItems = [];
+let foodItems = [];
+let snowflakes = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function getCurrentTheme() {
+  const bodyClasses = [...document.body.classList];
+  return bodyClasses.find(cls => cls.startsWith('theme-')) || 'theme-space';
+}
+
+function clearAnimation() {
+  cancelAnimationFrame(animationFrameId);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+const themeAnimations = {
+  'theme-space': animateStars,
+  'theme-sea': animateBubbles,
+  'theme-transport': animateTransport,
+  'theme-farm': animateLeaves,
+  'theme-numbers': animateNumbers,
+  'theme-time': animateClock,
+  'theme-clothes': animateClothes,
+  'theme-food': animateFood,
+  'theme-seasons': animateSnowflakes,
+  'theme-body-parts': animateCells
+};
+
+function runAnimation() {
+  const theme = getCurrentTheme();
+  const drawFunction = themeAnimations[theme] || themeAnimations['theme-space'];
+  clearAnimation();
+  function loop() {
+    drawFunction();
+    animationFrameId = requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+// Watch for theme changes dynamically
+const observer = new MutationObserver(runAnimation);
+observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+runAnimation(); // Start initial animation
+
+// --- ANIMATIONS ---
+
+// Space: Twinkling stars
+function animateStars() {
+  ctx.fillStyle = 'white';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!stars.length) {
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        alpha: Math.random(),
+        delta: Math.random() * 0.02
+      });
+    }
+  }
+
+  stars.forEach(star => {
+    star.alpha += star.delta;
+    if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+    ctx.globalAlpha = star.alpha;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+// Under the Sea: Bubbles rising
+function animateBubbles() {
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (bubbles.length < 50) {
+    bubbles.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + Math.random() * 100,
+      r: Math.random() * 5 + 2,
+      speed: Math.random() * 1 + 0.5
+    });
+  }
+
+  bubbles.forEach(bubble => {
+    bubble.y -= bubble.speed;
+    bubble.x += Math.sin(bubble.y * 0.02) * 0.5;
+
+    ctx.beginPath();
+    ctx.arc(bubble.x, bubble.y, bubble.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  bubbles = bubbles.filter(b => b.y > -10);
+}
+
+// Transport : Floating headlights and wheels
+function animateTransport() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (Math.random() < 0.1) {
+    transportObjects.push({
+      x: -20,
+      y: Math.random() * canvas.height,
+      speed: 2 + Math.random() * 2,
+      type: Math.random() > 0.5 ? 'car' : 'wheel'
+    });
+  }
+
+  transportObjects.forEach(obj => {
+    ctx.fillStyle = obj.type === 'car' ? 'yellow' : 'white';
+    if (obj.type === 'car') {
+      ctx.beginPath();
+      ctx.rect(obj.x, obj.y, 40, 10);
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.arc(obj.x + 10, obj.y + 5, 5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    obj.x += obj.speed;
+
+    if (obj.x > canvas.width + 50) {
+      transportObjects = transportObjects.filter(o => o !== obj);
+    }
+  });
+}
+
+// Farm: Drifting leaves
+function animateLeaves() {
+  ctx.fillStyle = 'rgba(0, 100, 0, 0.5)';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (leaves.length < 30) {
+    leaves.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      r: Math.random() * 10 + 5,
+      drift: (Math.random() - 0.5) * 1,
+      speed: Math.random() * 1 + 0.5
+    });
+  }
+
+  leaves.forEach(leaf => {
+    leaf.y += leaf.speed;
+    leaf.x += leaf.drift;
+
+    ctx.beginPath();
+    ctx.arc(leaf.x, leaf.y, leaf.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  leaves = leaves.filter(l => l.y < canvas.height + 10);
+}
+
+// Numbers: Floating digits
+function animateNumbers() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+  ctx.font = '20px sans-serif';
+
+  if (numbers.length < 20) {
+    numbers.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      num: Math.floor(Math.random() * 10),
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  numbers.forEach(n => {
+    n.x += n.dx;
+    n.y += n.dy;
+
+    if (n.x < 0 || n.x > canvas.width) n.dx *= -1;
+    if (n.y < 0 || n.y > canvas.height) n.dy *= -1;
+
+    ctx.fillText(n.num, n.x, n.y);
+  });
+}
+
+// Time: Rotating clock hands
+function animateClock() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(clock.angle);
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 2;
+
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(0, -80);
+  ctx.stroke();
+
+  ctx.restore();
+  clock.angle += 0.01;
+}
+
+// Clothes: Falling hangers or clothes icons
+function animateClothes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+
+  if (clothesItems.length < 15) {
+    clothesItems.push({
+      x: Math.random() * canvas.width,
+      y: -20,
+      size: 20, // now it's a square
+      speed: 1 + Math.random() * 1.5
+    });
+  }
+
+  clothesItems.forEach(item => {
+    item.y += item.speed;
+    ctx.fillRect(item.x, item.y, item.size, item.size); // draw square
+  });
+
+  clothesItems = clothesItems.filter(i => i.y < canvas.height);
+}
+
+// Food: Floating food icons
+function animateFood() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 200, 0, 0.6)';
+
+  if (foodItems.length < 15) {
+    foodItems.push({
+      x: Math.random() * canvas.width,
+      y: -20,
+      r: 10 + Math.random() * 10,
+      speed: 0.5 + Math.random()
+    });
+  }
+
+  foodItems.forEach(food => {
+    food.y += food.speed;
+    ctx.beginPath();
+    ctx.arc(food.x, food.y, food.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  foodItems = foodItems.filter(f => f.y < canvas.height);
+}
+
+//Seasons: Snowflakes
+function animateSnowflakes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'white';
+
+  if (snowflakes.length < 100) {
+    snowflakes.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      r: 2 + Math.random() * 3,
+      speed: 1 + Math.random() * 2,
+      drift: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  snowflakes.forEach(flake => {
+    flake.y += flake.speed;
+    flake.x += flake.drift;
+
+    ctx.beginPath();
+    ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  snowflakes = snowflakes.filter(f => f.y < canvas.height);
+}
+
+// 🧠 Body Parts: Drifting neurons/cells
+function animateCells() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+
+  if (Math.random() < 0.1) {
+    cells.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: 5 + Math.random() * 5,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  cells.forEach(cell => {
+    cell.x += cell.dx;
+    cell.y += cell.dy;
+
+    ctx.beginPath();
+    ctx.arc(cell.x, cell.y, cell.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  cells = cells.filter(c => c.x > 0 && c.x < canvas.width && c.y > 0 && c.y < canvas.height);
+}
+
+let numberParticles = [];
+
+function animateNumbers() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+  ctx.font = '20px sans-serif';
+  ctx.textAlign = 'center';
+
+  if (numberParticles.length < 30) {
+    numberParticles.push({
+      x: Math.random() * canvas.width,
+      y: -10,
+      number: Math.floor(Math.random() * 10),
+      dx: (Math.random() - 0.5) * 1,
+      dy: 1 + Math.random() * 1.5
+    });
+  }
+
+  numberParticles.forEach(p => {
+    p.y += p.dy;
+    p.x += p.dx;
+
+    ctx.fillText(p.number, p.x, p.y);
+
+    // Remove off-screen
+    if (p.y > canvas.height + 10) {
+      numberParticles = numberParticles.filter(particle => particle !== p);
+    }
+  });
+}
+

@@ -20,7 +20,10 @@
   --font-size-large: 18px;
   --font-size-quiz-input: 1.5em;
 }
-
+*
+ { 
+z-index: 3;
+}
 /* ============ BASE STYLES ============ */
 body {
   font-family: var(--font-main);
@@ -29,9 +32,12 @@ body {
   padding: 2rem;
   color: var(--text-color);
   margin: 0 auto;
+  min-height: 100%;
+
 }
 #center{
   text-align: center;
+  position: relative;
 }
 h1 {
   font-size: 2.5em;
@@ -135,12 +141,13 @@ h1 {
 #quizInput {
   font-size: var(--font-size-quiz-input);
   min-width: 65px;
+  border: 0.2rem solid #fffde7;
   padding: 5px 10px;
   margin: 20px 0;
-  background-color: #fffde7;
+  /* background-color: #fffde7; */
   border-radius: 8px;
   letter-spacing: 2px;
-  height: 35px;
+  height: 3rem;
   display: flex;
   gap: 1rem;
 }
@@ -179,19 +186,18 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
-  margin-top: 50px;
   position: relative;
 }
 
 /* Themes */
 /* Base theme */
-body.theme-space {
+/* body.theme-space {
   background-color: #aaaaaa;
 }
 body.theme-farm {
   background-color: #00ff00;
 }
-body.theme-vehicles {
+body.theme-transport {
   background-color: #ffee00;
 }
 body.theme-numbers {
@@ -214,6 +220,65 @@ body.theme-food {
 }
 body.theme-body-parts {
   background-color: #2600ff;
+} */
+/* Space */
+body.theme-space {
+  background-image: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* Farm */
+body.theme-farm {
+  background-image: linear-gradient(135deg, #77b545, #d8f3dc);
+  color: #333;
+}
+
+/* Transport */
+body.theme-transport {
+  background-image: linear-gradient(135deg, #ff41c0, #ff922b);
+  color: white;
+}
+
+/* Numbers */
+body.theme-numbers {
+  background-image: linear-gradient(135deg, #ab5893, #a18cd1);
+  color: #333;
+}
+
+/* Time */
+body.theme-time {
+  background-image: linear-gradient(135deg, #fdd835, #ffb300);
+  color: #333;
+}
+
+/* Under the Sea */
+body.theme-sea {
+  background-image: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+}
+
+/* Clothes */
+body.theme-clothes {
+  background-image: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #333;
+}
+
+/* Seasons */
+body.theme-seasons {
+  background-image: linear-gradient(135deg, #f5a442, #7fbf4d);
+  color: white;
+}
+
+/* Food */
+body.theme-food {
+  background-image: linear-gradient(135deg, #fcaf45, #f87122);
+  color: white;
+}
+
+/* Body Parts */
+body.theme-body-parts {
+  background-image: linear-gradient(135deg, #9cecfb, #6794e2);
+  color: white;
 }
 
 .level-card {
@@ -290,39 +355,38 @@ body.theme-body-parts {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   flex-direction: column;
 }
-
-.box:last-child {
-  background-blend-mode: multiply;
-  background-color: #0000004e;
-
-  min-height: 300px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  padding: 5rem 0.1rem;
+.box p{
+    font-size: 2.5rem;
+  font-weight: bold;
+  color: #8e8e8e;
 }
-
 /* World map flex */
 .world-map {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
-
+.tuma{
+   background-image: url("/static/images/dots.png");
+ background-position: center;
+   background-size: cover;
+}
 body > .box:nth-child(3) {
-  background-image: url("/static/images/looop.png");
+  /* background-image: url("/static/images/looop.png"); */
   background-size: cover;
-  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+   background-blend-mode: multiply;
+  background-color: #fcfcfc;
+  height: 25rem;
   background-position: center;
 }
 body > .box:nth-child(2) {
-  background-image: url("/static/images/dots.png");
+  /* background-image: url("/static/images/dots.png"); */
   background-size: cover;
   background-position: center;
 }
@@ -358,7 +422,7 @@ body > .box:nth-child(2) {
   background-image: linear-gradient(
     45deg,
     #ffc120,
-    #f1335f /* #ff80ee, */ /* #a72cff, */ /* #00e1ff */
+    #f1335f 
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -431,12 +495,12 @@ body > .box:nth-child(2) {
 }
 html {
   background-color: rgb(255, 255, 255);
+  height: 100%;
+  background-attachment: fixed;
 }
-/* .container {
-  min-height: 100vh;
-  overflow: hidden;
-  position: relative;
-} */
+
+
+
  .container {
   min-height: 100vh;
   overflow: hidden;
@@ -445,7 +509,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Behind login */
+  z-index: -1; /* Behind login */
 }
 .container div {
   position: absolute;
@@ -508,5 +572,17 @@ html {
   height: 100%;
   width: 100%;
   backdrop-filter: blur(200px);
+  z-index: 3;
 }
 
+
+/* canvasss */
+.background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
