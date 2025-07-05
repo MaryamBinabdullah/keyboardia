@@ -703,7 +703,7 @@ function clearAnimation() {
 }
 
 const themeAnimations = {
-  'theme-space': animateStars,   //animateStars
+  'theme-space': animateStars,
   'theme-sea': animateBubbles,
   'theme-transport': animateTransport,
   'theme-farm': animateLeaves,
@@ -919,10 +919,31 @@ function animateClock() {
   draw_clock(clock5, 60, 0.05);
 }
 
-
 // Clothes: Falling hangers or clothes icons
 function animateClothes() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+
+  if (clothesItems.length < 15) {
+    clothesItems.push({
+      x: Math.random() * canvas.width,
+      y: -20,
+      size: 20, // now it's a square
+      speed: 1 + Math.random() * 1.5
+    });
+  }
+
+  clothesItems.forEach(item => {
+    item.y += item.speed;
+    ctx.fillRect(item.x, item.y, item.size, item.size); // draw square
+  });
+
+  clothesItems = clothesItems.filter(i => i.y < canvas.height);
+}
+
+// Clothes: Falling hangers or clothes icons
+function animateClothes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.heighclt);
   ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
 
   if (clothesItems.length < 15) {
