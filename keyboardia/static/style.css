@@ -3,13 +3,13 @@
   /* Colors */
   /* --bg-color: #3877ae; */
   --bg-color: #fa0f8ff;
-  --key-bg: #b3fcff;
-  --key-hover: #e0e0e0;
-  --key-active-scale: 0.95;
-  --key-border: #ccc;
-  --highlight-bg: yellow;
-  --highlight-border: orange;
-  --pressed-bg: #ccffcc;
+  --key-bg: #ffdba9;              /* peach */
+  --key-hover: #ffc499;           /* darker peach */
+  --key-active-scale: 0.95;       
+  --key-border: #fbb362;          /* orange */
+  --highlight-bg: #fba9b1;        /* pink */
+  --highlight-border: #f07a85;    /* darker pink */
+  --pressed-bg: #fce8de;          /* almost white orange */
   --text-color: #333;
 
   /* Sizes */
@@ -25,6 +25,10 @@
 z-index: 3;
 }
 /* ============ BASE STYLES ============ */
+html {
+  height: 100%;
+  background-attachment: fixed;
+}
 body {
   font-family: var(--font-main);
   background-color: var(--bg-color);
@@ -32,8 +36,6 @@ body {
   padding: 2rem;
   color: var(--text-color);
   margin: 0 auto;
-  min-height: 100%;
-
 }
 #center{
   text-align: center;
@@ -72,7 +74,7 @@ h1 {
   width: var(--key-size);
   height: var(--key-size);
   font-size: var(--font-size-base);
-  border-radius: 4px;
+  border-radius: 12px;
   border: 2px solid var(--key-border);
   background-color: var(--key-bg);
   cursor: pointer;

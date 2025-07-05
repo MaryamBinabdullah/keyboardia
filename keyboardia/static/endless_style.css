@@ -1,0 +1,166 @@
+/* ============ CSS VARIABLES ============ */
+:root {
+  /* Colors */
+  /* --bg-color: #3877ae; */
+  --bg-color: #f2f4f8;            /* off white */
+  --key-bg: #ffdba9;              /* peach */
+  --key-hover: #ffc499;           /* darker peach */
+  --key-active-scale: 0.95;       
+  --key-border: #fbb362;          /* orange */
+  --highlight-bg: #fba9b1;        /* pink */
+  --highlight-border: #f07a85;    /* darker pink */
+  --pressed-bg: #fce8de;          /* almost white orange */
+  --text-color: #3f3f52;          /* bluish dark gray */
+  --word-color: #3f3f52;          /* bluish dark gray */
+  --word-border-color: #f87d9c;   /* pink */
+
+  --title-gradient: linear-gradient(to right, #ffc499, #d97dad);
+  --bg-gradient: linear-gradient(135deg, #f4dbd6, #deaeae); 
+
+
+  /* Sizes */
+  --key-size: 40px;
+  --spacebar-width: 160px;
+  --font-main: "Comic Sans MS", cursive, sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 18px;
+  --font-size-quiz-input: 1.5em;
+}
+
+/* ============ BASE STYLES ============ */
+html {
+  background-color: var(--bg-color);
+  height: 100%;
+  background-attachment: fixed;
+}
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  background: var(--bg-gradient);
+  height: 100%;
+  padding: 2rem;
+  color: var(--text-color);
+  margin: 0 auto;
+  background-attachment: fixed;
+  overflow-y: hidden;
+}
+
+#myCanvas {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline;
+    overflow: hidden;
+
+/*     border: 5px solid black; */
+    z-index: 0;
+}
+
+#center {
+  position: relative;
+  text-align: center;
+}
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  background: var(--title-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Typing word display */
+#wordContainer,
+#targetWord {
+  font-size: 2.5em;
+  padding: 10px 20px;
+  min-width: 100px;
+  height: 2rem;
+  padding-bottom: 3rem;
+}
+
+#wordContainer {
+  border: 3px dashed var(--word-border-color);
+  border-radius: 15px;
+  width: 40%;
+  margin: 5% auto;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+/* ============ KEYBOARD STYLES ============ */
+#keyboard {
+  margin: 30px auto;
+  max-width: 800px;
+  font-size: var(--font-size-base);
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+  gap: 6px;
+}
+
+.key {
+  width: var(--key-size);
+  height: var(--key-size);
+  font-size: var(--font-size-base);
+  border-radius: 12px;
+  border: 2px solid var(--key-border);
+  background-color: var(--key-bg);
+  cursor: pointer;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.key:hover {
+  background-color: var(--key-hover);
+}
+
+.key:active {
+  transform: scale(var(--key-active-scale));
+}
+
+/* Highlight next letter */
+.highlight {
+  background-color: var(--highlight-bg) !important;  /* comment this when applying animation */
+  border-color: var(--highlight-border);
+  font-weight: bold;
+  /* animation: blinking-key 1.3s infinite ease-in-out; */
+}
+
+/* Flash effect when a key is pressed */
+.pressed {
+  background-color: var(--pressed-bg) !important;
+  transition: background-color 0.2s ease;
+}
+
+/* Spacebar styling */
+.key-space {
+  width: var(--spacebar-width);
+  font-size: var(--font-size-large);
+}
+
+
+/* Moving background */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-color: rgb(255, 255, 255);
+}
+
+/* ~~~~~~~~~~~~~~~ custom animations ~~~~~~~~~~~~~~~~~~~~ */
+@keyframes blinking-key {
+  0%, 100% { background-color: var(--highlight-bg); }
+  50%      { background-color: var(--key-bg); }
+}
+ 
