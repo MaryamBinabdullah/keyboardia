@@ -1,19 +1,19 @@
 // setup
 var width =  window.innerWidth;
 var height = document.body.scrollHeight;
-// create canvas
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = width;
-canvas.height = height;
+// create canvas2
+const canvas2 = document.getElementById("myCanvas");
+const ctx2 = canvas2.getContext("2d");
+canvas2.width = width;
+canvas2.height = height;
 // print some info
 console.log("Page height:",height);
-console.log(ctx);
+console.log(ctx2);
 
 
 
 // draw test rect in the middle of the screen
-// ctx.fillRect(width/2 - 25, height/2 - 25, 50, 50);
+// ctx2.fillRect(width/2 - 25, height/2 - 25, 50, 50);
 
 
 // define classes
@@ -41,16 +41,16 @@ class Particle
 
     draw()
     {
-        ctx.save(); // Save the current transformation state
-        ctx.translate(this.x + this.radius / 2, this.y + this.radius / 2); // Move the origin to the center of the square
-        ctx.rotate(deg2rad(this.rotation)); // Rotate the canvas around the center of the square
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.radius / 2, -this.radius / 2, this.radius, this.radius); // Draw the square with an off
-        ctx.restore(); // Restore the previous transformation state
-//         ctx.beginPath();
-//         ctx.arc(this.x, this.y, this.radius, 0, deg2rad(360));
-// //         ctx.fill();
-//         ctx.stroke();
+        ctx2.save(); // Save the current transformation state
+        ctx2.translate(this.x + this.radius / 2, this.y + this.radius / 2); // Move the origin to the center of the square
+        ctx2.rotate(deg2rad(this.rotation)); // Rotate the canvas2 around the center of the square
+        ctx2.fillStyle = this.color;
+        ctx2.fillRect(-this.radius / 2, -this.radius / 2, this.radius, this.radius); // Draw the square with an off
+        ctx2.restore(); // Restore the previous transformation state
+//         ctx2.beginPath();
+//         ctx2.arc(this.x, this.y, this.radius, 0, deg2rad(360));
+// //         ctx2.fill();
+//         ctx2.stroke();
     }
 
     update()
@@ -121,8 +121,8 @@ function update_size() // updates width and hight
     // recalculate width and height
     width = window.innerWidth;
     height = document.body.scrollHeight;
-    canvas.width = width;
-    canvas.height = height;
+    canvas2.width = width;
+    canvas2.height = height;
     console.log("okay", width, "owo", height);
 }
 
@@ -135,12 +135,12 @@ const effect = new Effect();
 // the animation loop ( its like a game loop that updates every frame )
 function update() {
     // setting some context values
-    ctx.fillStyle = "white";
-    ctx.strokeStyle = "pink"
-    ctx.lineWidth = 10;
+    ctx2.fillStyle = "white";
+    ctx2.strokeStyle = "pink"
+    ctx2.lineWidth = 10;
 
     // clearing the screen
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
 
     effect.update();
 
