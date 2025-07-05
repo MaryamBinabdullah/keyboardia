@@ -2,6 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+       <!-- Favicon -->
+<link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" type="image/x-icon">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+
+<!-- Android Chrome Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='favicon/android-chrome-192x192.png') }}">
+<link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='favicon/android-chrome-512x512.png') }}">
     <title>Keyboardia - World Map</title>
     <link
       rel="stylesheet"
@@ -19,7 +27,7 @@
       <h1>Welcome to Keyboardia!</h1>
 
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem id quasi reiciendis ab labore, voluptatum nemo non iste consequatur alias eveniet saepe quo tempora!
+ Ready to start typing with fun? Choose how you'd like to play as Guest or login and join us!
       </p>
 
       <a href="/login" class="btn-enter">Login</a>

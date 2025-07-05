@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Keyboardia</title>
+   <!-- Favicon -->
+<link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" type="image/x-icon">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+
+<!-- Android Chrome Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='favicon/android-chrome-192x192.png') }}">
+<link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='favicon/android-chrome-512x512.png') }}">
+    
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
@@ -16,6 +25,10 @@
   </head>
   <body>
     <canvas id="backgroundCanvas" class="background-canvas"></canvas>
+    <!-- Back to Home Button -->
+<a href="/" class="btn-home">
+  <i class="fas fa-home"></i> 
+</a>
     <div id="center">
     <div id="themeName" class="themeName"></div>
     
@@ -31,6 +44,8 @@
 
     <!-- Quiz Section -->
     <div id="quizArea" style="display: none">
+      <p>type the name of the image</p>
+      <br>
       <img id="quizImage" src="" alt="Quiz Image" width="150" />
       <p id="quizQuestion">What is this?</p>
       <p>

@@ -7,16 +7,31 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css "
+    />
+       <!-- Favicon -->
+<link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}" type="image/x-icon">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon/apple-touch-icon.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='favicon/site.webmanifest') }}">
+
+<!-- Android Chrome Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='favicon/android-chrome-192x192.png') }}">
+<link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='favicon/android-chrome-512x512.png') }}">
     <title>Keyboardia-Log In</title>
   </head>
   <body>
-      <div class="container">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <a href="/" class="btn-home">
+      <i class="fas fa-home"></i>
+    </a>
+    <div class="container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <div class="login-page">
       <div class="login-container">

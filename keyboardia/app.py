@@ -1,4 +1,10 @@
-from flask import Flask, render_template, request, redirect, session, jsonify
+from flask import Flask, render_template, request, redirect, session, jsonify, send_from_directory
+import webbrowser
+import threading
+import time
+
+app = Flask(__name__, static_folder="static", template_folder="templates")
+
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)

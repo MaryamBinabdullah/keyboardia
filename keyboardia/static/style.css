@@ -588,3 +588,19 @@ html {
   z-index: 1;
   pointer-events: none;
 }
+.btn-home {
+   width: 40px;
+  height: 40px;
+
+  background-color: #e6e9ed;
+  color: #000000;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50%; /* Makes it a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
