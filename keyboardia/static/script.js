@@ -675,7 +675,12 @@ let bubbles = [];
 let transportObjects = [];
 let leaves = [];
 let numbers = [];
-let clock = { angle: 0 };
+let clock = { angle: 0, angle2:0, center_offsetx: 0, center_offsety: 0 };
+let clock2 = { angle: 0, angle2:0, center_offsetx: -200, center_offsety: -100 };
+let clock3 = { angle: 0, angle2:0, center_offsetx: 50, center_offsety: -200 };
+let clock4 = { angle: 0, angle2:0, center_offsetx: -80, center_offsety: 200 };
+let clock5 = { angle: 0, angle2:0, center_offsetx: 190, center_offsety: -20 };
+
 let clothesItems = [];
 let foodItems = [];
 let snowflakes = [];
@@ -698,7 +703,7 @@ function clearAnimation() {
 }
 
 const themeAnimations = {
-  'theme-space': animateStars,
+  'theme-space': animateStars,   //animateStars
   'theme-sea': animateBubbles,
   'theme-transport': animateTransport,
   'theme-farm': animateLeaves,
@@ -870,22 +875,50 @@ function animateNumbers() {
 }
 
 // Time: Rotating clock hands
-function animateClock() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate(clock.angle);
+function draw_clock(clock, radius=280, speed=0.01) {
+  let padding = 10;
   ctx.strokeStyle = 'white';
   ctx.lineWidth = 2;
-
+  // annoying rotating logic
+  ctx.save();
+  ctx.translate(canvas.width / 2 + clock.center_offsetx,
+  			    canvas.height / 2 + clock.center_offsety);
+  ctx.rotate(clock.angle);
+  // draw long clock thingy (for minutes)
   ctx.beginPath();
   ctx.moveTo(0, 0);
-  ctx.lineTo(0, -80);
+  ctx.lineTo(0, -radius);
   ctx.stroke();
-
-  ctx.restore();
-  clock.angle += 0.01;
+  ctx.restore(); // rotating logic ends
+  
+  // annoying rotating logic again
+  ctx.save();
+  ctx.translate(canvas.width / 2 + clock.center_offsetx,
+  			    canvas.height / 2 + clock.center_offsety);
+  ctx.rotate(clock.angle2);  // use angle for hour thingy
+  // draw short clock thingy (for hours)
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(0, -radius * 0.6); // 60% the size of minutes thingy
+  ctx.stroke();
+  // draw circle
+  ctx.beginPath();
+  ctx.arc(0, 0, radius + padding, 0, Math.PI * 2); // x, y, radius, startAngle, endAngle
+  ctx.stroke();
+  ctx.restore(); // rotating logic ends
+  
+  clock.angle += speed;
+  clock.angle2 += speed * 0.3; // rotating speed of hour thing is 30% of minutes thingy
 }
+function animateClock() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  draw_clock(clock, 100, 0.01);
+  draw_clock(clock2, 90, 0.02);
+  draw_clock(clock3, 80, 0.03);
+  draw_clock(clock4, 70, 0.04);
+  draw_clock(clock5, 60, 0.05);
+}
+
 
 // Clothes: Falling hangers or clothes icons
 function animateClothes() {
