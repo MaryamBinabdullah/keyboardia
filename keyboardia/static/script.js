@@ -680,7 +680,7 @@ let clock2 = { angle: 0, angle2:0, center_offsetx: -200, center_offsety: -100 };
 let clock3 = { angle: 0, angle2:0, center_offsetx: 50, center_offsety: -200 };
 let clock4 = { angle: 0, angle2:0, center_offsetx: -80, center_offsety: 200 };
 let clock5 = { angle: 0, angle2:0, center_offsetx: 190, center_offsety: -20 };
-
+let cells = [];
 let clothesItems = [];
 let foodItems = [];
 let snowflakes = [];
@@ -1013,6 +1013,7 @@ function animateSnowflakes() {
 
   snowflakes = snowflakes.filter(f => f.y < canvas.height);
 }
+
 
 // 🧠 Body Parts: Drifting neurons/cells
 function animateCells() {
