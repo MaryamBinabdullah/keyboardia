@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Endless Typing Keyboardia</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='endless_style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 
 </head>
 <body>
+    <script src="{{ url_for('static', filename='script2.js') }}"></script>
+
 <div id="center">
     <h1>Endless Keboardia Typing</h1>
 
@@ -21,7 +23,7 @@
 
     <div id="keyboard"></div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </div>
 </body>
 </html>
