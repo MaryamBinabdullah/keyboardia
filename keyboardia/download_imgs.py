@@ -73,8 +73,7 @@ if __name__ == "__main__":
     # 2. Register for a developer account.
     # 3. Create a new application.
     # 4. Find your "Access Key" in your application details.
-    #key = "zoYoqwPpOKY50Cqo_IS2vXl3TWS6GTHZG9yepku1KYA" # <<< Jenn!
-    key = "YqRUCbm1fvmsEJzmgrWCmXBTFn9upq94nRG30fSM-y8" # <<< Meme!
+    key = "Access key goes here" # <<< get your access key and add it!
 
     # Example usage
     # download_unsplash_image("numbers", client_id=YOUR_ACCESS_KEY)

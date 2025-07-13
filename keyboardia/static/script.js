@@ -1,7 +1,7 @@
 // import confetti from 'canvas-confetti';
 const targetWord = document.getElementById("targetWord");
 const themeName = document.getElementById("themeName") || { innerText: "" };
-const ONE_WORD_STAGES = true  // when enabled each stage will have only 1 word (for testing)
+const ONE_WORD_STAGES = false  // when enabled each stage will have only 1 word (for testing)
 
 //""""
 let rhymeAudio = null;
