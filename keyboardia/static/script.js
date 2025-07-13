@@ -440,7 +440,7 @@ function launchConfetti() {
 }
 // Play sound effect
 function playSound() {
-  const audio = new Audio("/static/audio/key-sound.mp3");
+  const audio = new Audio("/static/audio/Key-sound.mp3");  
   audio.play();
 }
 

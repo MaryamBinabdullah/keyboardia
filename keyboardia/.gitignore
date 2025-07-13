@@ -1,0 +1,8 @@
+# Specific files to ignore
+key.txt
+note.txt
+app.spec
+
+# Folders and files inside folders
+/dist/
+/static/new_levels.json
